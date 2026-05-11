@@ -1,134 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Presentation</title>
-  <style>
-    /* Global styles */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #F5F0E8;
-    }
-    
-    /* Typography */
-    h1 {
-      font-size: 36px;
-      font-weight: bold;
-      color: #333;
-      line-height: 42px;
-    }
-    p {
-      font-size: 16px;
-      margin-bottom: 14px;
-      color: #666;
-    }
-    
-    /* Terracotta accents */
-    .terracotta {
-      background-color: #E07A5F;
-      padding: 10px;
-      border-radius: 4px;
-      box-shadow: rgba(0, 0, 0, 0.2) 0 1px 3px;
-    }
-    
-    /* Magazine-style layout */
-    .magazine {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: calc(100vh - 14px);
-    }
-    
-    /* Full-screen slides */
-    [data-slide] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    [data-slide][data-active] {
-      z-index: 1;
-    }
-    
-    /* Transitions */
-    [data-slide].animate {
-      transition-property: transform, opacity;
-      transition-duration: 500ms;
-      transition-timing-function: ease-out;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Магазин Веб-Медиа</title>
+    <style>
+        /* Reset CSS to ensure consistent visuals */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .slide {
+            background-color: #f0f0f0;
+            padding: 20px;
+            text-align: left;
+        }
+        .hero-slide {
+            background-color: #337ab7;
+            color: #fff;
+            padding: 40px;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
-  <nav id="slide-nav">
-    ⬅️
-    <button id="previous-button" disabled>Previous</button>
-    <button id="next-button">Next</button>
-    ➡️
-  </nav>
-  
-  <!-- Slide 1 -->
-  <section data-slide data-active>
-    <h1>Welcome to the Presentation!</h1>
-    <p>This is the first slide.</p>
-  </section>
-  
-  <!-- Slide 2 -->
-  <section data-slide>
-    <h1>Why This Matters</h1>
-    <p>This is the second slide, with more content.</p>
-  </section>
-  
-  <!-- ... (omitting slides for brevity) ... -->
-  
-  <!-- Slide 7 -->
-  <section data-slide>
-    <h1>New Developments</h1>
-    <p>This is the seventh slide, with exciting news!</p>
-  </section>
-  
-  <!-- Slide 8 -->
-  <section data-slide data-active>
-    <h1>Conclusion</h1>
-    <p>This is the final slide. Thank you for watching!</p>
-  </section>
-  
-  <script>
-    // Horizontal navigation (arrow keys and click)
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "ArrowLeft") {
-        previousSlide();
-      } else if (event.key === "ArrowRight") {
-        nextSlide();
-      }
-    });
-    
-    document.getElementById("previous-button").addEventListener("click", previousSlide);
-    document.getElementById("next-button").addEventListener("click", nextSlide);
-    
-    function previousSlide() {
-      const activeSlide = document.querySelector("[data-active]");
-      if (activeSlide.previousElementSibling) {
-        activeSlide.preventDefault();
-        activeSlide.previousElementSibling.querySelector("[data-slide]").dataset.active = true;
-        activeSlide.dataset.active = false;
-      }
-    }
-    
-    function nextSlide() {
-      const activeSlide = document.querySelector("[data-active]");
-      if (activeSlide.nextElementSibling) {
-        activeSlide.preventDefault();
-        activeSlide.nextElementSibling.querySelector("[data-slide]").dataset.active = true;
-        activeSlide.dataset.active = false;
-      }
-    }
-  </script>
+    <nav id="nav">
+        <ul>
+            <li><a href="#00">00. Интродукция</a></li>
+            <li><a href="#01">01. О Магазине Веб-Медиа</a></li>
+            <li><a href="#02">02. Наша Миссия</a></li>
+            <!-- Add more slides as needed -->
+        </ul>
+    </nav>
+
+    <div id="slides">
+        <section class="slide" id="00">
+            <h2>Магазин Веб-Медиа: Интродукция</h2>
+            <p>В этом магазине мы собираем идеи и опыт в области веб- медиа.</p>
+        </section>
+
+        <section class="slide" id="01">
+            <h2>О Магазине Веб-Медиа</h2>
+            <p>Магазин Веб-Медиа является частью сети Магазина, которая изначально была создана для представления веб-компаний.</p>
+        </section>
+
+        <section class="hero-slide" id="02">
+            <h1>&#x20BF;&#x20AC;&#xC2; Наша Миссия</h1>
+            <p>Мы хотим помочь вам создать успешный проект веб-медиа.</p>
+        </section>
+
+        <!-- Add more slides as needed -->
+    </div>
+
+    <script type="text/javascript">
+        // JavaScript code to handle navigation
+        (function () {
+            var nav = document.getElementById('nav'),
+                slides = document.getElementById('slides');
+
+            if (!nav || !slides) return;
+
+            Array.prototype.forEach.call(nav.querySelectorAll('a'), function (link) {
+                link.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    var targetId = link.getAttribute('href').substr(1);
+                    var targetSlide = slides.querySelector('#' + targetId);
+
+                    slides.querySelector('.active-slide').classList.remove('active-slide');
+                    targetSlide.classList.add('active-slide');
+
+                    // Scroll to target slide
+                    var top = targetSlide.offsetTop;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                });
+            });
+
+            nav.addEventListener('click', function (e) {
+                e.preventDefault();
+            });
+        })();
+    </script>
 </body>
 </html>
